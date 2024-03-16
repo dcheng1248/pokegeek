@@ -1,11 +1,8 @@
-import { PokemonBasic } from "./pokemon-basic";
+import { Pokemon } from "./pokemon";
 
-export class PokemonApiResponse {
+export interface PokemonApiResponse {
 
-    constructor(
-        public count: number,
-        public next: string,
-        public results: PokemonBasic[]
-    ) {}
+    count: number,
+    results: Pokemon[]
 
 }
