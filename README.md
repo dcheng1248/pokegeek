@@ -1,14 +1,38 @@
 # Pokegeek
 
+Inspiriert von BoardGameGeek (https://boardgamegeek.com/) soll dieses Projekt Pokemon-Liebhabern eine Plattform bieten, auf der sie verschiedene Pokemon ansehen und bewerten können.
+Inspired by BoardGameGeek (https://boardgamegeek.com/), this project aims to provide a platform for Pokemon lovers to view and rate various Pokemons. 
+
+Dieses Projekt wurde mit [Angular CLI](https://github.com/angular/angular-cli) Version 17.2.0 erstellt.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.0.
 
-## Development server
+## Anforderungen / Requirements
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### v1.0.0 (Minimum Viable Product)
 
-## Code scaffolding
+#### Functional
+1. An index homepage rendered by the "pokemon-index" component showing all usual pokemons (ID < 10000)
+    - This should automatically update if there are new pokemons in the API
+    - Pokemons should be shown on cards organized in a grid
+    - Each pokemon card should have the name, image and types of the pokemon
+    - Each pokemon card should be clickable and route to the pokemon details page
+2. A pokemon details page for each pokemon rendered by the "pokemon-details" component
+    - This should contain the name, image, height, weight, types, abilities and base stats of the pokemon
+3. A header on each page rendered by the "pokemon-header" component
+    - This should include a pokemon logo, the name of the web app (Pokegeek) and a link for navigating to the index homepage
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+#### Non Functional
+1. This should be deployed locally to `http://localhost:4200/` by the `ng serve` command from the Angular CLI
+
+### v1.0.1 (Quality of Life Improvements)
+
+#### Functional
+1. The "pokemon-index" component
+    - This should allow filtering pokemon by type
+    - This should contain pagination for navigating the large number of pokemons
+
+#### Non Functional
+1. This should be deployed via github pages
 
 ## Build
 
