@@ -9,7 +9,8 @@
   
     <div class="grid-layout" *ngIf="pokemons">
       <div *ngFor="let pokemon of displayedPokemons | paginate: { itemsPerPage: 24, currentPage: currentPage }">
-        <mat-card class="pokemon-card" [style.background]="getTypeBackgroundColor(pokemon.details.types[0].type.name)" *ngIf="pokemon.details" >
+        <mat-card class="pokemon-card" [style.background]="getTypeBackgroundColor(pokemon.details.types[0].type.name)" *ngIf="pokemon.id && pokemon.details" 
+          (click)="showPokemonDetail(pokemon.id)">
           <mat-card-title>{{ pokemon.name | titlecase }}</mat-card-title>
           <div class="background-image">
             <img
