@@ -16,20 +16,17 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
     - Pokemons should be shown on cards organized in a grid
     - Each pokemon card should have the name, image and types of the pokemon
     - Each pokemon card should be clickable and route to the pokemon details page
+    - This should allow filtering pokemon by type
+    - This should contain pagination for navigating the large number of pokemo
 2. A pokemon details page for each pokemon rendered by the "pokemon-details" component
     - This should contain the name, image, height, weight, types, abilities and base stats of the pokemon
 3. A header on each page rendered by the "pokemon-header" component
-    - This should include a pokemon logo, the name of the web app (Pokegeek) and a link for navigating to the index homepage
+    - This should include the name of the web app (Pokegeek), a public domain pokeball icon and a link for navigating to the index homepage
 
 #### Non Functional
 1. This should be deployed locally to `http://localhost:4200/` by the `ng serve` command from the Angular CLI
 
-### v1.0.1 (Quality of Life Improvements)
-
-#### Functional
-1. The "pokemon-index" component
-    - This should allow filtering pokemon by type
-    - This should contain pagination for navigating the large number of pokemons
+### v1.0.1 (Deployment)
 
 #### Non Functional
 1. This should be deployed via github pages
