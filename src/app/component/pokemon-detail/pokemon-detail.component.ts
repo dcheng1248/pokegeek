@@ -8,11 +8,12 @@ import { MatCardModule } from '@angular/material/card';
 import { TypeBackgroundColor } from '../../model/type-background-color';
 import { TypeColor } from '../../model/type-color';
 import { CommonModule } from '@angular/common';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-pokemon-detail',
   standalone: true,
-  imports: [MatCardModule, CommonModule],
+  imports: [MatCardModule, CommonModule, HeaderComponent],
   templateUrl: './pokemon-detail.component.html',
   styleUrl: './pokemon-detail.component.scss'
 })

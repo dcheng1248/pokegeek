@@ -11,12 +11,13 @@ import { Pokemon } from '../../model/pokemon';
 import { PokemonDetail } from '../../model/pokemon-detail';
 import { TypeColor } from '../../model/type-color';
 import { TypeBackgroundColor } from '../../model/type-background-color';
+import { HeaderComponent } from '../header/header.component';
 
 
 @Component({
   selector: 'app-pokemon',
   standalone: true,
-  imports: [MatCardModule, CommonModule, NgxPaginationModule, FormsModule],
+  imports: [MatCardModule, CommonModule, NgxPaginationModule, FormsModule, HeaderComponent],
   templateUrl: './pokemon-index.component.html',
   styleUrl: './pokemon-index.component.scss'
 })
