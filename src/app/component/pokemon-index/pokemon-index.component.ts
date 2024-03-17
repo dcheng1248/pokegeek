@@ -17,10 +17,10 @@ import { TypeBackgroundColor } from '../../model/type-background-color';
   selector: 'app-pokemon',
   standalone: true,
   imports: [MatCardModule, CommonModule, NgxPaginationModule, FormsModule],
-  templateUrl: './pokemon.component.html',
-  styleUrl: './pokemon.component.scss'
+  templateUrl: './pokemon-index.component.html',
+  styleUrl: './pokemon-index.component.scss'
 })
-export class PokemonComponent implements OnInit{
+export class PokemonIndexComponent implements OnInit{
 
   pokemons: Pokemon[] = [];
   displayedPokemons: Pokemon[] = [];

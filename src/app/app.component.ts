@@ -5,13 +5,13 @@ import { RouterOutlet } from '@angular/router';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon'
 
-import { PokemonComponent } from './component/pokemon/pokemon.component';
+import { PokemonIndexComponent } from './component/pokemon-index/pokemon-index.component';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MatSidenavModule, MatIconModule, PokemonComponent],
+  imports: [RouterOutlet, MatSidenavModule, MatIconModule, PokemonIndexComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
