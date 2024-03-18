@@ -2,17 +2,40 @@
 
 <div style="text-align:center">
 
-  <label for="pokemonTypeSelect">Filter by Pokémon Type: </label>
+  <label for="pokemonTypeSelect">Filter by Type: </label>
   <select [(ngModel)]="selectedType" (change)="filterByType()" id="pokemonTypeSelect">
     Filter by Pokemon Type:
     <option value="">All Types</option>
     <option *ngFor="let type of types" [value]="type">{{ type | titlecase }}</option>
   </select>
+
+  <br><br>
+
+  <label for="pokemonNameInput">Search by Name: </label>
+  <mat-form-field>
+    <input
+      type="text"
+      matInput
+      [formControl]="searchControl"
+      [matAutocomplete]="auto"
+      placeholder="Pokémon Name"
+      (keyup.enter)="filterByName()"
+    />
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let pokemon of suggestedPokemons" [value]="pokemon.name" (click)="showPokemonDetail(pokemon)">
+        {{ pokemon.name | titlecase }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <button mat-icon-button class="search-button"(click)="filterByName()">
+    <mat-icon>search</mat-icon>
+  </button>
+
   
     <div class="grid-layout" *ngIf="pokemons">
       <div *ngFor="let pokemon of displayedPokemons | paginate: { itemsPerPage: 24, currentPage: currentPage }">
         <mat-card class="pokemon-card" [style.background]="getTypeBackgroundColor(pokemon.details.types[0].type.name)" *ngIf="pokemon.id && pokemon.details" 
-          (click)="showPokemonDetail(pokemon.id)">
+          (click)="showPokemonDetail(pokemon)">
           <mat-card-title>{{ pokemon.name | titlecase }}</mat-card-title>
           <div class="background-image">
             <img

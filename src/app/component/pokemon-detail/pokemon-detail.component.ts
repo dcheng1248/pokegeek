@@ -29,7 +29,6 @@ export class PokemonDetailComponent implements OnInit{
     if (this.pokemon) {
       this.getPokemonDetails(this.pokemon);
     }
-    console.log(this.pokemon);
 
   }
 

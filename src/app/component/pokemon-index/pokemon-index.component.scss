@@ -12,6 +12,13 @@ select option {
   font-size: 14px;
 }
 
+.search-button {
+  position: relative;
+  top: 7px;
+  margin-left: 10px;
+  padding-top: 5px;
+}
+
 
 .grid-layout {
   padding: 50px 0;
@@ -82,17 +89,4 @@ select option {
 
 .pagination {
   font-size: 20px;
-}
-
-.loading {
-  text-align:center;
-  margin: 15% 0;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 20px;
-  font-weight: bold;
-  color: #673ab7;
-
-  .mat-spinner {
-    margin: 20px auto;
-  }
 }

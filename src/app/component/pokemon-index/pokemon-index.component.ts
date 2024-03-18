@@ -4,7 +4,11 @@ import { Router } from '@angular/router';
 
 import { MatCardModule } from '@angular/material/card';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatIconModule } from '@angular/material/icon';
 
 import { PokemonService } from '../../service/pokemon.service';
 import { Pokemon } from '../../model/pokemon';
@@ -13,11 +17,10 @@ import { TypeColor } from '../../model/type-color';
 import { TypeBackgroundColor } from '../../model/type-background-color';
 import { HeaderComponent } from '../header/header.component';
 
-
 @Component({
   selector: 'app-pokemon',
   standalone: true,
-  imports: [MatCardModule, CommonModule, NgxPaginationModule, FormsModule, HeaderComponent],
+  imports: [MatCardModule, MatAutocompleteModule, MatIconModule, CommonModule, NgxPaginationModule, FormsModule, ReactiveFormsModule, MatInputModule, MatFormFieldModule, HeaderComponent],
   templateUrl: './pokemon-index.component.html',
   styleUrl: './pokemon-index.component.scss'
 })
@@ -25,13 +28,20 @@ export class PokemonIndexComponent implements OnInit{
 
   pokemons: Pokemon[] = [];
   displayedPokemons: Pokemon[] = [];
+  suggestedPokemons: Pokemon[] = [];
   currentPage: number = 1;
   types: string[] = ['bug','dark','dragon','electric','fairy','fighting','fire','flying','ghost','grass','ground','ice','normal','poison','psychic','rock','steel','water'];
   selectedType: string = "";
+  searchTerm: string = "";
+  searchControl = new FormControl();
 
   constructor(private pokemonService: PokemonService, private router: Router){}
 
   ngOnInit():void {
+    this.searchControl.valueChanges.subscribe(searchTerm => {
+      this.searchTerm = searchTerm;
+      this.suggestByName()
+    });
     this.getValidPokemons();
   }
 
@@ -77,8 +87,32 @@ export class PokemonIndexComponent implements OnInit{
         if (pokemon.details && pokemon.details.types) {
           return pokemon.details.types.some(type => type.type.name === this.selectedType);
         }
-        return undefined;
+        return [];
       });
+    }
+    else {
+      this.displayedPokemons = this.pokemons;
+    }
+    this.currentPage = 1;
+  }
+
+  // generate suggestion list of pokemons
+  suggestByName() {
+    if (this.searchTerm) {
+      this.suggestedPokemons = this.pokemons.filter(pokemon => 
+        pokemon.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    }
+    else {
+      this.suggestedPokemons = [];
+    }
+  }
+
+  filterByName() {
+    if (this.searchTerm) {
+      this.displayedPokemons = this.pokemons.filter(pokemon => 
+        pokemon.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
     }
     else {
       this.displayedPokemons = this.pokemons;
@@ -91,9 +125,8 @@ export class PokemonIndexComponent implements OnInit{
   }
 
   // show pokemon details when card is clicked
-  showPokemonDetail(pokemonId: number) {
-    let pokemonName: string = this.getPokemonNameById(pokemonId);
-    this.router.navigate([`/pokemon-detail/${pokemonName}`]);
+  showPokemonDetail(pokemon: Pokemon) {
+    this.router.navigate([`/pokemon-detail/${pokemon.name}`]);
   }
 
 }

@@ -40,6 +40,14 @@ v1.0.1: Pokemon details component does not support mobile viewing
 #### Non Functional
 1. This should be deployed via github pages
 
+### v1.0.2 (Search improvement)
+
+#### Functional
+1. The index homepage (pokemon-index component) allows users to search pokemon by name
+    - A list of autocomplete suggestions should be made as the user types
+    - When the user clicks on a suggestion, redirection to that pokemon occurs
+    - If a user hits enter or press the search icon, the pokemons are filtered so only the ones containing the search string are listed
+
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
