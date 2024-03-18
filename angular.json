@@ -101,21 +101,7 @@
           }
         },
         "deploy": {
-          "builder": "@angular/fire:deploy",
-          "options": {
-            "version": 2
-          },
-          "configurations": {
-            "production": {
-              "buildTarget": "pokegeek:build:production",
-              "serveTarget": "pokegeek:serve:production"
-            },
-            "development": {
-              "buildTarget": "pokegeek:build:development",
-              "serveTarget": "pokegeek:serve:development"
-            }
-          },
-          "defaultConfiguration": "production"
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }

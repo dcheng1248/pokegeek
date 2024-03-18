@@ -1,9 +1,0 @@
-{
-  "hosting": [
-    {
-      "target": "pokegeek",
-      "source": ".",
-      "frameworksBackend": {}
-    }
-  ]
-}
