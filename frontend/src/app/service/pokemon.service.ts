@@ -32,7 +32,7 @@ export class PokemonService {
   }
 
   getPokemonDetail(pokemon: Pokemon): Observable<PokemonDetail> {
-      return this.http.get<PokemonDetail>(`${this.pokemonURL}/${pokemon.id}`)
+      return this.http.get<PokemonDetail>(pokemon.url)
       .pipe(catchError(this.handleError));
   }
 
