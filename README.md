@@ -1,8 +1,10 @@
 # Pokegeek
+For English, see [README_ENGLISH.MD](./README_ENGLISH.md).
+
 Inspiriert von BoardGameGeek (https://boardgamegeek.com) bietet dieses Projekt eine Plattform für Pokemon-Liebhaber, um verschiedene Pokemon zu betrachten und zu bewerten.
 
 Für ein detailliertes Entwicklungsprotokoll und Entwürfe, siehe [ENTWICKLUNG_NOTIZ.MD](./ENTWICKLUNGS_NOTIZ.md). 
-Für Englisch, siehe [README_ENGLISH.MD](./README_ENGLISH.md).
+
 
 ## Funktionen
 Diese Web-App besteht aus einem Typescript/Angular-Frontend, einem Java/Spring-Backend und einer mySQL-Datenbank.
