@@ -3,13 +3,26 @@
 <div style="text-align:center" *ngIf="pokemon">
     <mat-card class="pokemon-card" [style.background]="getTypeBackgroundColor(pokemon.details.types[0].type.name)" *ngIf="pokemon.details" >
         <mat-card-title>{{ pokemon.name | titlecase }}</mat-card-title>
-            <div class="background-image">
-                <img
-                mat-card-image
-                src="{{ pokemon.details.sprites.front_default }}"
-                alt="photo of {{ pokemon.name }}"
-                />
-            </div>
+        <div class="pokemon-rating">
+            <span class="rating" *ngIf="pokemon.rating">{{ pokemon.rating | number: '1.2-2'}}</span>
+            <span class="unrated" *ngIf="!pokemon.rating">Unrated</span>
+            <ngx-stars 
+            [readonly]="true" 
+            [maxStars]="10" 
+            *ngIf="(pokemon.rating || pokemon.rating === 0)" 
+            [size] = 2
+            [color] = "'black'"
+            [initialStars]="pokemon.rating">
+            </ngx-stars>
+            <span class="rating-number">{{ pokemon.rating_number }} ratings</span>
+        </div>
+        <div class="background-image">
+            <img
+            mat-card-image
+            src="{{ pokemon.details.sprites.front_default }}"
+            alt="photo of {{ pokemon.name }}"
+            />
+        </div>
         <mat-card-content>
             <div class="pokemon-details-container">
                 <!-- Left column -->
@@ -51,5 +64,15 @@
                 </div>
             </div>
         </mat-card-content>
+        <div class="pokemon-get-rating">
+            <span style="margin-right: 10px; font-weight:bold"> Rate this pokemon! </span>
+            <ngx-stars  
+            [maxStars]="10" 
+            [size] = 2
+            [color] = "'black'"
+            [wholeStars]="true"
+            (ratingOutput)="onRatingSet($event)">
+            </ngx-stars>
+        </div>
     </mat-card>
 </div>
