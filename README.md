@@ -48,6 +48,25 @@ v1.0.1: Pokemon details component does not support mobile viewing
     - When the user clicks on a suggestion, redirection to that pokemon occurs
     - If a user hits enter or press the search icon, the pokemons are filtered so only the ones containing the search string are listed
 
+### v1.1.0 (Incorporate backend)
+
+#### Functional
+1. A mySQL database should be set up to record and report user ratings of pokemons
+    - The database should have 1 pokemon_ratings table and a pokemon_ratings_summary table
+    - New ratings should be recorded to the pokemon_ratings table
+    - The pokmeon_ratings_summary table should report average rating and total number of ratings for each pokemon
+    - New inserts into the pokemon_ratings table should trigger an automatic update in the pokemon_rating_summary table
+2. A Java backend should be developed to connect the Angular frontend with the mySQL database
+    - The backend should have a PokemonRatings entity and a PokemonRatingsSummary entity corresponding to the two database tables
+    - The backend should expose a POST endpoint that adds rating data to the database
+    - The backend should expose a GET endpoint that gets rating summary data from the database
+3. The Angular frontend should be modified to allow user rating and display of rating summary data
+    - Rating summary data should be displayed as number of stars (out of 10) with total number of ratings in both the pokemon-index and pokemon-details component. 
+    - A form allowing users to rate the pokemon should be added to the pokemon-details component.
+
+#### Non-Functional
+1. The frontend should be deployed on github pages while the backend and database are deployed locally. The backend should be deployed to `http://localhost:8080/`.
+
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
