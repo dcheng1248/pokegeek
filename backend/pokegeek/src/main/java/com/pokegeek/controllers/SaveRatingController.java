@@ -1,6 +1,8 @@
 package com.pokegeek.controllers;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,7 @@ import com.pokegeek.entities.PokemonRatingsSummary;
 import com.pokegeek.services.RateService;
 
 @RestController
+@CrossOrigin("http://localhost:4200/")
 @RequestMapping("/api")
 public class SaveRatingController {
 
@@ -28,10 +31,10 @@ public class SaveRatingController {
         return pokemonRatingSummary;
     }
 
-    @GetMapping("/get")
-    public PokemonRatingsSummary getRating(String pokemonName) {
+    @GetMapping("/get/{pokemonName}")
+    public PokemonRatingsSummary getRating(@PathVariable String pokemonName) {
 
-        PokemonRatingsSummary pokemonRatingSummary = rateService.getRating("Pikachu");
+        PokemonRatingsSummary pokemonRatingSummary = rateService.getRating(pokemonName);
 
         return pokemonRatingSummary;
     }
