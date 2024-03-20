@@ -13,7 +13,7 @@ import com.pokegeek.entities.PokemonRatingsSummary;
 import com.pokegeek.services.RateService;
 
 @RestController
-@CrossOrigin("http://localhost:4200/")
+@CrossOrigin({"http://localhost:4200/","https://dcheng1248.github.io/pokegeek/"})
 @RequestMapping("/api")
 public class SaveRatingController {
 
