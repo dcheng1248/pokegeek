@@ -1,4 +1,4 @@
-# Pokegeek
+# Pokegeek (http://pokegeek.online)
 For English, see [README_ENGLISH.MD](./README_ENGLISH.md).
 
 Inspiriert von BoardGameGeek (https://boardgamegeek.com) bietet dieses Projekt eine Plattform für Pokemon-Liebhaber, um verschiedene Pokemon zu betrachten und zu bewerten.
