@@ -1,76 +1,37 @@
 # Pokegeek
+Inspiriert von BoardGameGeek (https://boardgamegeek.com) bietet dieses Projekt eine Plattform für Pokemon-Liebhaber, um verschiedene Pokemon zu betrachten und zu bewerten.
 
-Inspired by BoardGameGeek (https://boardgamegeek.com/), this project aims to provide a platform for Pokemon lovers to view and rate various Pokemons. \
+Für ein detailliertes Entwicklungsprotokoll und Entwürfe, siehe [ENTWICKLUNG_NOTIZ.MD](./ENTWICKLUNGS_NOTIZ.md). 
+Für Englisch, siehe [README_ENGLISH.MD](./README_ENGLISH.md).
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.0.
+## Funktionen
+Diese Web-App besteht aus einem Typescript/Angular-Frontend, einem Java/Spring-Backend und einer mySQL-Datenbank.
+1. Das Frontend kann unter http://pokegeek.online eingesehen werden. Es wird über Github-Pages deployt. 
+    - Die Indexseite zeigt alle regulären Pokemon (von PokeAPI). Sie erlaubt die Filterung nach Pokemon-Typ, hat eine Autocomplete-Suchleiste und ist paginiert.
+    - Ein Klick auf jede Pokemonkarte führt zur Pokemondetailseite, die Details über das Pokemon anzeigt (von PokeAPI). Sie zeigt auch die durchschnittliche Benutzerbewertung und die Gesamtzahl der Bewertungen an und ermöglicht es dem Benutzer, das Pokemon zu bewerten (aus dem Java-Backend). 
+    - Die Kopfkomponente ermöglicht es dem Benutzer, zur Pokemon-Indexseite zurückzukehren. 
 
-## Development Log
+2. Auf das Backend kann über http://157.230.114.115:8080/api zugegriffen werden. Es wird auf einer Cloud-basierten virtuellen Maschine deployt. 
+    - Es bietet einen GET-Endpunkt für jedes Pokemon (Endpunkt: /get/{pokemon_name}), der eine json-Datei mit der durchschnittlichen Bewertung und der Anzahl der Bewertungen des Pokemons zurückgibt. 
+    - Es stellt einen POST-Endpunkt zur Verfügung (Endpunkt: /save), der die Benutzerbewertungen in der Datenbank speichert. 
 
-See requirements section for details of each version
+3. Die Datenbank ist nicht öffentlich zugänglich. Sie wird auf einer Cloud-basierten virtuellen Maschine deployt. 
+    - Sie verfügt über eine Tabelle, in der jede Benutzerbewertung gespeichert wird (Bewertungs-ID, Pokemon-Name, Bewertung und Datum). 
+    - Es gibt eine Tabelle, die aggregierte Informationen (durchschnittliche Bewertung und Gesamtzahl der Bewertungen) für jedes Pokemon speichert, die automatisch beim Einfügen in die erste Tabelle aktualisiert wird. 
 
-17.03.2024
-1. Deployed v1.0.0
-2. Deployed v1.0.1
+## Bekannte Probleme
+1. Diese App unterstützt kein https, sie muss über http angezeigt werden (aufgrund eines fehlenden SSL-Zertifikats an der Backend-Adresse). Wenn Ihr Browser für die Verwendung von https konfiguriert ist, kann der Inkognito-Modus helfen, http beizubehalten.
+2. Diese App unterstützt keine mobile Anzeige. 
+3. Die App ist nur manuell getestet. Unit Tests sind noch nicht verfügbar. 
+4. Integration und Deployierung erfolgen manuell.
 
-Issues:
-v1.0.1: Pokemon details component does not support mobile viewing
+## Anweisungen zum Erstellen/Starten aus Source
+1. Stellen Sie sicher, dass Sie die Anforderungen installiert haben: [Angular](https://angular.io/guide/setup-local), [Java 17](https://docs.oracle.com/en/java/javase/17/install/#Java-Platform%2C-Standard-Edition) und [MySQL Server](https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/). Wenn nicht, folgen Sie den Links, um sie zu installieren. 
 
-## Anforderungen / Requirements
+2. Klonen Sie dieses Repo: `git clone git@github.com:dcheng1248/pokegeek.git`
 
-### v1.0.0 (Minimum Viable Product)
+3. Richten Sie zunächst die Datenbank ein. Loggen Sie sich in die MySQL CLI ein oder benutzen Sie die GUI, um die Datei `database/create_db.sql` auszuführen. Beachten Sie, dass diese Datei eine Zeile enthält, die anfangs eine Bewertung von 8 für Pikachu einfügt. Wenn Sie das nicht wollen, entfernen Sie diese Zeile aus der Datei, bevor Sie sie ausführen. 
 
-#### Functional
-1. An index homepage rendered by the "pokemon-index" component showing all usual pokemons (ID < 10000)
-    - This should automatically update if there are new pokemons in the API
-    - Pokemons should be shown on cards organized in a grid
-    - Each pokemon card should have the name, image and types of the pokemon
-    - Each pokemon card should be clickable and route to the pokemon details page
-    - This should allow filtering pokemon by type
-    - This should contain pagination for navigating the large number of pokemo
-2. A pokemon details page for each pokemon rendered by the "pokemon-details" component
-    - This should contain the name, image, height, weight, types, abilities and base stats of the pokemon
-3. A header on each page rendered by the "pokemon-header" component
-    - This should include the name of the web app (Pokegeek), a public domain pokeball icon and a link for navigating to the index homepage
+4. Führen Sie im Backend-Ordner `./mvnw clean package` aus, um das Backend zu erstellen. Es kann dann mit `/usr/bin/java -jar target/pokegeek-0.0.1-SNAPSHOT.jar` ausgeführt werden. Alternativ können Sie auch `./mvnw spring-boot:run` verwenden, um das Backend direkt zu starten.
 
-#### Non Functional
-1. This should be deployed locally to `http://localhost:4200/` by the `ng serve` command from the Angular CLI
-
-### v1.0.1 (Deployment)
-
-#### Non Functional
-1. This should be deployed via github pages
-
-### v1.0.2 (Search improvement)
-
-#### Functional
-1. The index homepage (pokemon-index component) allows users to search pokemon by name
-    - A list of autocomplete suggestions should be made as the user types
-    - When the user clicks on a suggestion, redirection to that pokemon occurs
-    - If a user hits enter or press the search icon, the pokemons are filtered so only the ones containing the search string are listed
-
-### v1.1.0 (Incorporate backend)
-
-#### Functional
-1. A mySQL database should be set up to record and report user ratings of pokemons
-    - The database should have 1 pokemon_ratings table and a pokemon_ratings_summary table
-    - New ratings should be recorded to the pokemon_ratings table
-    - The pokmeon_ratings_summary table should report average rating and total number of ratings for each pokemon
-    - New inserts into the pokemon_ratings table should trigger an automatic update in the pokemon_rating_summary table
-2. A Java backend should be developed to connect the Angular frontend with the mySQL database
-    - The backend should have a PokemonRatings entity and a PokemonRatingsSummary entity corresponding to the two database tables
-    - The backend should expose a POST endpoint that adds rating data to the database
-    - The backend should expose a GET endpoint that gets rating summary data from the database
-3. The Angular frontend should be modified to allow user rating and display of rating summary data
-    - Rating summary data should be displayed as number of stars (out of 10) with total number of ratings in both the pokemon-index and pokemon-details component. 
-    - A form allowing users to rate the pokemon should be added to the pokemon-details component.
-
-#### Non-Functional
-1. The frontend should be deployed on github pages while the backend and database are deployed locally. The backend should be deployed to `http://localhost:8080/`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+5. Ändern Sie im Frontend-Ordner die Backend-URL, falls erforderlich (in src/environments/environment.development.ts und environment.ts). Wenn das Backend lokal gestartet wird, lautet die URL normalerweise `http://localhost:8080`. Starten Sie das Frontend mit `ng serve`. 

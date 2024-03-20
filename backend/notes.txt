@@ -1,2 +1,0 @@
-Deploying spring backend on droplet:
-https://gsswain.medium.com/springboot-digitalocean-droplets-410b8bbc6fe6
