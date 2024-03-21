@@ -14,7 +14,7 @@ import com.pokegeek.services.RateService;
 
 // API Controller
 @RestController
-@CrossOrigin({"http://localhost:4200/","http://pokegeek.online/"})
+@CrossOrigin({"http://localhost:4200/","http://pokegeek.online/","http://64.23.237.225/"})
 @RequestMapping("/api")
 public class SaveRatingController {
 
