@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import com.pokegeek.entities.PokemonRatings;
 import com.pokegeek.entities.PokemonRatingsSummary;
 
+//defines API endpoint exposure
 @Configuration
 public class RestDataConfig implements RepositoryRestConfigurer {
 

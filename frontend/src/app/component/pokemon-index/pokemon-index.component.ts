@@ -108,6 +108,7 @@ export class PokemonIndexComponent implements OnInit{
     }
   }
 
+  // filter pokemons by name entered
   filterByName() {
     if (this.searchTerm) {
       this.displayedPokemons = this.pokemons.filter(pokemon => 
@@ -118,10 +119,6 @@ export class PokemonIndexComponent implements OnInit{
       this.displayedPokemons = this.pokemons;
     }
     this.currentPage = 1;
-  }
-
-  getPokemonNameById(pokemonId: number): string {
-    return this.pokemons[pokemonId-1].name;
   }
 
   // show pokemon details when card is clicked

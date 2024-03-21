@@ -9,6 +9,7 @@ import com.pokegeek.entities.PokemonRatingsSummary;
 
 import jakarta.transaction.Transactional;
 
+// Connect with database
 @Service
 public class RateServiceImpl implements RateService{
 
@@ -20,6 +21,7 @@ public class RateServiceImpl implements RateService{
         this.pokemonRatingSummaryRepository = pokemonRatingSummaryRepository;
     }
 
+    // save rating, returning new summary rating for the pokemon
     @Transactional
     public PokemonRatingsSummary saveRating(PokemonRatings pokemonRating) {
 
@@ -28,6 +30,7 @@ public class RateServiceImpl implements RateService{
         
     }
 
+    // get summary rating for a pokemon
     public PokemonRatingsSummary getRating(String pokemonName) {
 
         return this.pokemonRatingSummaryRepository.findById(pokemonName).orElse(null);

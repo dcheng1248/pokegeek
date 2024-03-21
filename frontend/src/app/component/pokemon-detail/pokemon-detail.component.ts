@@ -32,12 +32,14 @@ export class PokemonDetailComponent implements OnInit{
 
     this.route.params.subscribe(params => this.pokemon = {name: params['pokemonName'], url: `${environment.pokemonURL}/${params['pokemonName']}`});
     if (this.pokemon) {
+      // get rating summary from backend and Pokemon Details from PokeAPI
       this.getRatingSummary(this.pokemon);
       this.getPokemonDetails(this.pokemon);
     }
 
   }
 
+  // set rating summary if exists in database, otherwise set to 0
   getRatingSummary(pokemon: Pokemon): void {
     this.ratingService.getRatingSummary(pokemon).subscribe((pokemonRatingSummaryApiResponse: PokemonRatingSummaryApiResponse) => {
       if (pokemonRatingSummaryApiResponse) {
@@ -48,7 +50,6 @@ export class PokemonDetailComponent implements OnInit{
         pokemon.rating = 0;
         pokemon.rating_number = 0;
       }
-      console.log(pokemon.rating);
     })
   }
 
@@ -58,16 +59,19 @@ export class PokemonDetailComponent implements OnInit{
     )
   }
 
+  // colour of type boxes
   getTypeColor(type: string): string {
     return (TypeColor as Record<string, string>)[type];
   }
 
+  // background colour of pokemon card
   getTypeBackgroundColor(type: string): string {
     return (TypeBackgroundColor as Record<string, string>)[type];
   }
 
+  // Records user rating
   onRatingSet(userRating: number): void {
-    if (this.pokemon && window.confirm(`Do you want to give a rating of ${userRating} to this pokemon?`)) {
+    if (this.pokemon && window.confirm(`Do you want to give a rating of ${userRating} to this pokemon?`)) { // confirming intention to rate, save if yes
       this.userRating = userRating;
       let pokmeonRating: PokemonRatingDto = {
         pokemonName: this.pokemon.name,
@@ -80,10 +84,10 @@ export class PokemonDetailComponent implements OnInit{
         }
       });
       alert(`Thank you for rating! This window will now be reloaded.`);
-      window.location.reload();
+      window.location.reload(); // reload window to reflect new summary rating information
     }
     else {
-      alert(`The rating has been cancelled.`)
+      alert(`The rating has been cancelled.`) // cancel rating and do nothing if no
     }
   }
 
